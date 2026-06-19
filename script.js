@@ -120,49 +120,65 @@ dy:5
 
 let particles = [];
 
-/* CONTROLS */
+//* CONTROLS */
 
 let left = false;
 let right = false;
 
-document.addEventListener("keydown",(e)=>{
+let touchLeft = false;
+let touchRight = false;
 
-if(
-e.key === "ArrowLeft" ||
-e.key === "a" ||
-e.key === "A"
-){
-left = true;
-}
+/* KEYBOARD */
 
-if(
-e.key === "ArrowRight" ||
-e.key === "d" ||
-e.key === "D"
-){
-right = true;
-}
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+        left = true;
+    }
 
+    if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+        right = true;
+    }
 });
 
-document.addEventListener("keyup",(e)=>{
+document.addEventListener("keyup", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+        left = false;
+    }
 
-if(
-e.key === "ArrowLeft" ||
-e.key === "a" ||
-e.key === "A"
-){
-left = false;
-}
+    if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+        right = false;
+    }
+});
 
-if(
-e.key === "ArrowRight" ||
-e.key === "d" ||
-e.key === "D"
-){
-right = false;
-}
+/* TOUCH CONTROLS (MOBILE) */
 
+document.addEventListener("touchstart", (e) => {
+    const x = e.touches[0].clientX;
+
+    if (x < window.innerWidth / 2) {
+        touchLeft = true;
+        touchRight = false;
+    } else {
+        touchRight = true;
+        touchLeft = false;
+    }
+});
+
+document.addEventListener("touchmove", (e) => {
+    const x = e.touches[0].clientX;
+
+    if (x < window.innerWidth / 2) {
+        touchLeft = true;
+        touchRight = false;
+    } else {
+        touchRight = true;
+        touchLeft = false;
+    }
+});
+
+document.addEventListener("touchend", () => {
+    touchLeft = false;
+    touchRight = false;
 });
 
 /* START */
@@ -351,11 +367,11 @@ function update(){
 
 if(isGameOver) return;
 
-if(left)
-paddle.x -= paddle.speed;
+if (left || touchLeft)
+    paddle.x -= paddle.speed;
 
-if(right)
-paddle.x += paddle.speed;
+if (right || touchRight)
+    paddle.x += paddle.speed;
 
 if(paddle.x < 0)
 paddle.x = 0;
@@ -404,6 +420,11 @@ ball.dy > 0
 ){
 
 ball.dy *= -1;
+
+/* HAPTIC FEEDBACK */
+if (navigator.vibrate) {
+    navigator.vibrate(30);
+}
 
 /* SMART BOUNCE */
 
