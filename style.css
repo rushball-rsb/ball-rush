@@ -1,0 +1,404 @@
+
+:root{
+    --accent:#00d4ff;
+
+    --bg1:#0f172a;
+    --bg2:#020617;
+    --bg3:#111827;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:
+    "Segoe UI",
+    sans-serif;
+
+    overflow:hidden;
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--bg1),
+    var(--bg2),
+    var(--bg3)
+    );
+
+    transition:
+    background 1.2s ease;
+}
+
+/* =====================
+   START MENU
+===================== */
+
+#menu{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:20px;
+
+    z-index:1000;
+
+    background:
+    radial-gradient(
+    circle at center,
+    rgba(255,255,255,.04),
+    rgba(0,0,0,.92)
+    );
+}
+
+.logo{
+
+    font-size:72px;
+
+    font-weight:900;
+
+    letter-spacing:8px;
+
+    color:white;
+
+    text-shadow:
+    0 0 15px var(--accent),
+    0 0 35px var(--accent),
+    0 0 60px var(--accent);
+
+    animation:
+    glow 2s infinite alternate;
+}
+
+.subtitle{
+
+    color:#cbd5e1;
+
+    font-size:20px;
+
+    letter-spacing:2px;
+}
+
+.menu-best{
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    padding:12px 24px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:
+    blur(12px);
+}
+
+.controls-info{
+
+    color:#94a3b8;
+
+    font-size:16px;
+}
+
+#startBtn{
+
+    margin-top:10px;
+
+    padding:18px 45px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:#000;
+
+    background:
+    var(--accent);
+
+    box-shadow:
+    0 0 15px var(--accent),
+    0 0 45px var(--accent);
+
+    transition:.3s;
+}
+
+#startBtn:hover{
+
+    transform:
+    scale(1.08);
+
+    box-shadow:
+    0 0 25px var(--accent),
+    0 0 70px var(--accent);
+}
+
+/* =====================
+   HUD
+===================== */
+
+.hud{
+
+    position:absolute;
+
+    top:20px;
+
+    display:flex;
+
+    gap:15px;
+
+    z-index:100;
+}
+
+.card{
+
+    min-width:120px;
+
+    text-align:center;
+
+    padding:14px 22px;
+
+    color:white;
+
+    font-weight:700;
+
+    border-radius:16px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:
+    blur(12px);
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,.05);
+
+    transition:.8s;
+}
+
+/* =====================
+   GAME CANVAS
+===================== */
+
+canvas{
+
+    width:92vw;
+
+    max-width:1000px;
+
+    height:82vh;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.01)
+    );
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 0 40px var(--accent);
+
+    transition:
+    box-shadow 1s ease,
+    border-color 1s ease;
+}
+
+/* =====================
+   GAME OVER
+===================== */
+
+#gameOver{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    justify-content:center;
+    align-items:center;
+
+    background:
+    rgba(0,0,0,.75);
+
+    backdrop-filter:
+    blur(10px);
+
+    z-index:999;
+}
+
+.gameover-card{
+
+    width:350px;
+
+    padding:35px;
+
+    text-align:center;
+
+    border-radius:24px;
+
+    color:white;
+
+    background:
+    rgba(15,23,42,.8);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:
+    blur(18px);
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,.4);
+}
+
+.gameover-card h1{
+
+    margin-bottom:15px;
+
+    color:var(--accent);
+
+    text-shadow:
+    0 0 20px var(--accent);
+}
+
+.gameover-card p{
+
+    margin-top:10px;
+
+    font-size:22px;
+}
+
+.gameover-card button{
+
+    margin-top:20px;
+
+    padding:14px 30px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#000;
+
+    background:
+    var(--accent);
+
+    box-shadow:
+    0 0 20px var(--accent);
+
+    transition:.3s;
+}
+
+.gameover-card button:hover{
+
+    transform:
+    scale(1.05);
+}
+
+/* =====================
+   ANIMATIONS
+===================== */
+
+@keyframes glow{
+
+    from{
+
+        text-shadow:
+        0 0 10px var(--accent),
+        0 0 25px var(--accent);
+    }
+
+    to{
+
+        text-shadow:
+        0 0 20px var(--accent),
+        0 0 50px var(--accent),
+        0 0 90px var(--accent);
+    }
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media(max-width:768px){
+
+    .logo{
+
+        font-size:48px;
+    }
+
+    .subtitle{
+
+        font-size:16px;
+    }
+
+    .menu-best{
+
+        font-size:18px;
+    }
+
+    .card{
+
+        min-width:90px;
+
+        padding:10px 14px;
+
+        font-size:14px;
+    }
+
+    canvas{
+
+        height:75vh;
+    }
+
+    .gameover-card{
+
+        width:90%;
+    }
+}

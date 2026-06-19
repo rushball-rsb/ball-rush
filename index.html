@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Rush V4.0</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- START MENU -->
+
+    <div id="menu">
+
+        <h1 class="logo">
+            BALL RUSH
+        </h1>
+
+        <p class="subtitle">
+            Neon Arcade Edition
+        </p>
+
+        <div class="menu-best">
+            BEST SCORE:
+            <span id="menuBest">0</span>
+        </div>
+
+        <div class="controls-info">
+            Move: A / D or ← →
+        </div>
+
+        <button id="startBtn">
+            START GAME
+        </button>
+
+    </div>
+
+    <!-- HUD -->
+
+    <div class="hud">
+
+        <div class="card">
+            Score:
+            <span id="score">0</span>
+        </div>
+
+        <div class="card">
+            Best:
+            <span id="best">0</span>
+        </div>
+
+    </div>
+
+    <!-- GAME CANVAS -->
+
+    <canvas id="game"></canvas>
+
+    <!-- GAME OVER -->
+
+    <div id="gameOver">
+
+        <div class="gameover-card">
+
+            <h1>
+                GAME OVER
+            </h1>
+
+            <p>
+                Score:
+                <span id="finalScore">
+                    0
+                </span>
+            </p>
+
+            <p>
+                Best:
+                <span id="finalBest">
+                    0
+                </span>
+            </p>
+
+            <button onclick="restartGame()">
+                PLAY AGAIN
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
