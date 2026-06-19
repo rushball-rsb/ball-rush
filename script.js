@@ -152,33 +152,22 @@ document.addEventListener("keyup", (e) => {
 
 /* TOUCH CONTROLS (MOBILE) */
 
-document.addEventListener("touchstart", (e) => {
-    const x = e.touches[0].clientX;
+let touchActive = false;
+let touchX = 0;
 
-    if (x < window.innerWidth / 2) {
-        touchLeft = true;
-        touchRight = false;
-    } else {
-        touchRight = true;
-        touchLeft = false;
-    }
+document.addEventListener("touchstart", (e) => {
+    touchActive = true;
+    touchX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchmove", (e) => {
-    const x = e.touches[0].clientX;
+    if (!touchActive) return;
 
-    if (x < window.innerWidth / 2) {
-        touchLeft = true;
-        touchRight = false;
-    } else {
-        touchRight = true;
-        touchLeft = false;
-    }
+    touchX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchend", () => {
-    touchLeft = false;
-    touchRight = false;
+    touchActive = false;
 });
 
 /* START */
@@ -366,11 +355,21 @@ ctx.restore();
 function update(){
 
 if(isGameOver) return;
+if (touchActive) {
+    const center = paddle.x + paddle.width / 2;
 
-if (left || touchLeft)
+    if (touchX < center) {
+        paddle.x -= paddle.speed;
+    } else {
+        paddle.x += paddle.speed;
+    }
+}
+
+// keyboard ham qoladi
+if (left)
     paddle.x -= paddle.speed;
 
-if (right || touchRight)
+if (right)
     paddle.x += paddle.speed;
 
 if(paddle.x < 0)
